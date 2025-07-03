@@ -1,10 +1,5 @@
 package com.example.fitnesscentre
 
-import android.R.attr.icon
-import android.R.attr.label
-import android.R.attr.onClick
-import android.R.attr.start
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,8 +8,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.ui.text.font.FontWeight
-
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -25,7 +18,6 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
-import androidx.compose.material3.AlertDialogDefaults.containerColor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
@@ -38,20 +30,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.fitnesscentre.itemList
+import androidx.compose.ui.text.font.FontWeight
 import com.example.fitnesscentre.ui.theme.FitnessCentreTheme
 
-// Data class representing each item
 data class Simpleitem(val imageres: Int, val title: String)
 
-// Sample list of items (image and text)
 val itemList = listOf(
     Simpleitem(R.drawable.image1, "Gym: Body Shape "),
     Simpleitem(R.drawable.image2, "Yoga: Body Align"),
     Simpleitem(R.drawable.image3, "Stretching"),
     Simpleitem(R.drawable.image4, "Inversion"),
     Simpleitem(R.drawable.image1, "Fitness"),
-    Simpleitem(R.drawable.ic_launcher_background, "Weighting"),
+    Simpleitem(R.drawable.ic_launcher_background, "Weighting")
 )
 
 class MainActivity : ComponentActivity() {
@@ -62,7 +52,7 @@ class MainActivity : ComponentActivity() {
             FitnessCentreTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = Color(0xFFF1F8E9) // 🍃 Fresh light green background
+                    color = Color(0xFFBFEFFF) // Soft gray background
                 ) {
                     MainScreen()
                 }
@@ -80,14 +70,14 @@ fun Searchbar(modifier: Modifier = Modifier) {
             Icon(imageVector = Icons.Default.Search, contentDescription = null)
         },
         colors = TextFieldDefaults.colors(
-            unfocusedContainerColor = Color(0xFFE3F2FD),
-            focusedContainerColor = Color(0xFFBBDEFB),
+            unfocusedContainerColor = Color(0xFFBFEFFF),
+            focusedContainerColor = Color(0xFFE8EAF6),
             unfocusedIndicatorColor = Color.Transparent,
-            focusedIndicatorColor = Color(0xFF64B5F6),
-            cursorColor = Color(0xFF1976D2),
-            focusedLabelColor = Color(0xFF1976D2)
+            focusedIndicatorColor = Color(0xFF3F51B5),
+            cursorColor = Color(0xFF3F51B5),
+            focusedLabelColor = Color(0xFF3F51B5)
         ),
-        placeholder = { Text("Search something") },
+        placeholder = { Text("Search something", color = Color(0xFF757575)) },
         modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 16.dp)
@@ -111,7 +101,11 @@ fun AlignBody(modifier: Modifier = Modifier) {
                         .size(88.dp)
                         .clip(CircleShape)
                 )
-                Text(text = item.title, modifier = Modifier.padding(top = 8.dp))
+                Text(
+                    text = item.title,
+                    modifier = Modifier.padding(top = 8.dp),
+                    color = Color(0xFF212121)
+                )
             }
         }
     }
@@ -121,6 +115,7 @@ fun AlignBody(modifier: Modifier = Modifier) {
 fun Favs(modifier: Modifier = Modifier) {
     Surface(
         shape = MaterialTheme.shapes.medium,
+        color = Color.White,
         modifier = modifier
     ) {
         LazyHorizontalGrid(
@@ -145,7 +140,11 @@ fun Favs(modifier: Modifier = Modifier) {
                             .size(88.dp)
                             .clip(CircleShape)
                     )
-                    Text(text = item.title, modifier = Modifier.padding(start = 20.dp))
+                    Text(
+                        text = item.title,
+                        modifier = Modifier.padding(start = 20.dp),
+                        color = Color(0xFF212121)
+                    )
                 }
             }
         }
@@ -158,17 +157,21 @@ private fun Navigationbar() {
         modifier = Modifier
             .padding(horizontal = 10.dp)
             .height(80.dp),
-        containerColor = Color(0xFF81C784) // 🍃 Light green
+        containerColor = Color(0xFFBFEFFF)
     ) {
         NavigationBarItem(
-            icon = { Icon(Icons.Default.Home, contentDescription = null) },
-            label = { Text("Home") },
+            icon = {
+                Icon(Icons.Default.Home, contentDescription = null)//, tint = Color(0xFFCDDC39))
+            },
+            label = { Text("Home", color = Color.White) },
             selected = true,
             onClick = {}
         )
         NavigationBarItem(
-            icon = { Icon(Icons.Default.AccountCircle, contentDescription = null) },
-            label = { Text("Profile") },
+            icon = {
+                Icon(Icons.Default.AccountCircle, contentDescription = null)//, tint = Color(0xFFCDDC39))
+            },
+            label = { Text("Profile", color = Color.White) },
             selected = false,
             onClick = {}
         )
@@ -180,7 +183,7 @@ private fun Navigationbar() {
 fun Navigationrail(modifier: Modifier = Modifier) {
     NavigationRail(
         modifier = modifier.padding(start = 8.dp, end = 8.dp),
-        containerColor = Color(0xFF81C784) // 🍃 Light green
+        containerColor = Color(0xFF3F51B5)
     ) {
         Column(
             modifier = modifier.fillMaxHeight(),
@@ -188,14 +191,18 @@ fun Navigationrail(modifier: Modifier = Modifier) {
             horizontalAlignment = CenterHorizontally
         ) {
             NavigationRailItem(
-                icon = { Icon(Icons.Default.Home, contentDescription = null) },
-                label = { Text("Home") },
+                icon = {
+                    Icon(Icons.Default.Home, contentDescription = null, tint = Color(0xFFCDDC39))
+                },
+                label = { Text("Home", color = Color.White) },
                 selected = true,
                 onClick = {}
             )
             NavigationRailItem(
-                icon = { Icon(Icons.Default.AccountCircle, contentDescription = null) },
-                label = { Text("Profile") },
+                icon = {
+                    Icon(Icons.Default.AccountCircle, contentDescription = null, tint = Color(0xFFCDDC39))
+                },
+                label = { Text("Profile", color = Color.White) },
                 selected = false,
                 onClick = {}
             )
@@ -210,7 +217,7 @@ fun Tablets() {
         Row(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color(0xFFF1F8E9)) // 🍃 Background
+                .background(Color(0xFFFAFAFA))
         ) {
             Navigationrail()
             Spacer(modifier = Modifier.height(15.dp))
@@ -219,20 +226,18 @@ fun Tablets() {
                 Spacer(modifier = Modifier.height(15.dp))
                 Text(
                     text = " Align Your Body",
-                    style = MaterialTheme.typography.bodyMedium,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                    color = Color(0xFF212121)
                 )
                 Spacer(modifier = Modifier.height(20.dp))
                 AlignBody()
                 Spacer(modifier = Modifier.height(35.dp))
                 Text(
                     text = " Favourite Collections",
-                    style = MaterialTheme.typography.bodyMedium,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                    color = Color(0xFF212121)
                 )
                 Spacer(modifier = Modifier.height(15.dp))
                 Favs()
@@ -250,7 +255,7 @@ fun Phone(modifier: Modifier) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color(0xFFF1F8E9)) // 🍃 Background
+                .background(Color(0xFFFAFAFA))
                 .padding(paddingValues)
         ) {
             Searchbar(modifier = Modifier.padding(horizontal = 10.dp))
@@ -258,10 +263,9 @@ fun Phone(modifier: Modifier) {
             Text(
                 modifier = Modifier.padding(horizontal = 10.dp),
                 text = " Align Your Body",
-                style = MaterialTheme.typography.bodyMedium,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
+                color = Color(0xFF212121)
             )
             Spacer(modifier = Modifier.height(20.dp))
             AlignBody()
@@ -269,10 +273,9 @@ fun Phone(modifier: Modifier) {
             Text(
                 modifier = Modifier.padding(horizontal = 10.dp),
                 text = " Favourite Collections",
-                style = MaterialTheme.typography.bodyMedium,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
+                color = Color(0xFF212121)
             )
             Spacer(modifier = Modifier.height(20.dp))
             Favs()
